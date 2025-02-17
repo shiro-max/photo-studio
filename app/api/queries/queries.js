@@ -1,24 +1,44 @@
 import { gql } from '@apollo/client';
 
+// Get Navigation Links 
+
+const GET_NAVIGATION_LINKS = gql`
+query GetNavLinks {
+    navigation {
+        logo {
+            image {
+                alternativeText
+                url
+            }
+        }
+    Link {
+        ... on ComponentLinksLink {
+            name
+            path
+            }
+        }
+    }
+}
+`
+
+export { GET_NAVIGATION_LINKS }
+
 // Get Hero Section qureies from strapi graphql
 
 const GET_HERO_SECTION = gql`
 query GetHeroSection {
     homePage {
-        blocks {
-            ... on ComponentBlocksHeroSection {
-                id
-                heading
-                description
-                image {
-                    name
-                    alternativeText
-                    url
-                }
-                cta {
-                    href
-                    isExternal
-                    text
+        heroSection {
+        ... on ComponentBlocksHeroSection {
+            heading
+            description
+            image {
+                alternativeText
+                url
+            }
+            cta {
+                name
+                path
                 }
             }
         }
@@ -54,23 +74,55 @@ export { GET_POSTS }
 // Get single post by documentId qureies from strapi graphql
 
 const GET_POST = gql`
-query Query($documentId: ID!) {
-    post(documentId: $documentId) {
+query GetSinglePost($documentId: ID!) {
+        post(documentId: $documentId) {
         documentId
         title
         description
-        like
-        updatedAt
-
+        body
         image {
             name
             alternativeText
             documentId
             url
             }
-
+        updatedAt
     }
 }
 `
 
 export { GET_POST }
+
+
+// get categories
+
+const GET_CATEGORIES = gql`
+query GetCategories {
+    menu {
+        categories {
+                name
+                path
+                documentId
+                posts {
+                        title
+                        body
+                        author
+                        documentId
+                        description
+                        image {
+                            alternativeText
+                            url
+                            documentId
+                            }
+                        categories {
+                            documentId
+                            name
+                            path
+                            }
+                }
+        }
+    }
+}
+`
+
+export { GET_CATEGORIES }

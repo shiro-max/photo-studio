@@ -11,23 +11,22 @@ const PostDetail = async ({ params }) => {
 
     // base url for image
     const BASE_URL = process.env.STRAPI_IMG_ENDPOINT
+    console.log(post);
 
-    // image name
-    const imageName = post.image[0]?.name
     
     return (
         <div className="post-detail">
-            <h2>{post.title}</h2>
-            <small>{imageName}</small>
+            <h2>{post?.title}</h2>
+            <small>{post?.description}</small>
             <Image
                 className="post-image"
-                src={`${BASE_URL}${post.image[0].url}`}
+                src={`${BASE_URL}${post?.image?.url}`}
                 alt={post.image.alternativeText || "Post image"}
                 width={400}
                 height={400}
                 priority={true}
             />
-            <p>{post.description}</p>
+            <p style={{lineHeight: "2"}}>{post?.body}</p>
         </div>
     );
 };

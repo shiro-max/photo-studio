@@ -6,6 +6,7 @@ const HeroSection = async () => {
     // base url for image
     const BASE_URL = process.env.STRAPI_IMG_ENDPOINT
     const heroData = await getHeroSection();
+
     return (
         <div className='hero-section'>
             <Image
@@ -17,7 +18,7 @@ const HeroSection = async () => {
                 priority={true}
             />
             <div className='hero-content'>
-                <Link href={heroData.cta.href}>Destination </Link>
+                <Link href={heroData.cta.path}>Destination </Link>
                 <h3>{heroData.title} title</h3>
                 <small>{heroData.description}</small>
             </div>

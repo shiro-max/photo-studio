@@ -4,6 +4,7 @@ import PostList from "./PostList";
 
 const Posts = async () => {
     const posts = await getPosts();
+    
     return (
         <main>
             <PostList posts={posts} title="All Posts"/>

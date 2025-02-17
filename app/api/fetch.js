@@ -1,7 +1,27 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { GET_HERO_SECTION, GET_POST, GET_POSTS } from "./queries/queries";
+import { GET_CATEGORIES, GET_HERO_SECTION, GET_NAVIGATION_LINKS, GET_POST, GET_POSTS } from "./queries/queries";
 
-//get Hero Section Pages
+//get Nav Links
+
+export async function getNavBar() {
+    const client = new ApolloClient({
+        uri : process.env.STRAPI_API_URL,
+        cache: new InMemoryCache()
+    });
+    try {
+        const { data } = await client.query({
+            query: GET_NAVIGATION_LINKS
+        });
+        const navLinks = await data?.navigation;
+        return navLinks;
+        
+    } catch (error) {
+        console.error("Error fetching hero section:", error);
+        return [];
+    }
+}
+
+//get Hero section
 
 export async function getHeroSection() {
     const client = new ApolloClient({
@@ -12,7 +32,7 @@ export async function getHeroSection() {
         const { data } = await client.query({
             query: GET_HERO_SECTION
         });
-        const heroSection = await data?.homePage?.blocks[0];
+        const heroSection = await data?.homePage?.heroSection[0];
         return heroSection;
         
     } catch (error) {
@@ -34,7 +54,7 @@ export async function getPosts() {
         const { data } = await client.query({
             query: GET_POSTS
         });
-        return data.posts;
+        return data;
     } catch (error) {
         console.error("Error fetching posts:", error);
         return [];
@@ -54,9 +74,28 @@ export async function getPost(documentId) {
             query: GET_POST,
             variables: { documentId }
         });
+        console.log(data);
         return data.post;
     } catch (error) {
         console.error("Error fetching post:", error);
         return null;
+    }
+}
+
+// get all categories
+
+export async function getCategories(){
+    const client = new ApolloClient({
+        uri: process.env.STRAPI_API_URL,
+        cache: new InMemoryCache()
+    });
+    try {
+        const { data } = await client.query({
+            query: GET_CATEGORIES
+        });
+        return data?.menu?.categories;
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+        return { success: false, error: error.message };
     }
 }
