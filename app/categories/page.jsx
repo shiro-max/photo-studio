@@ -1,11 +1,14 @@
-import { getCategories } from "../api/fetch"
+
 import CategoriesList from "./CategoriesList";
 
-const Categories = async () => {
-    const categoriesData = await getCategories();
-    
+const Categories = ({ data }) => {
+
+    const categoriesData = data;
+
     return (
-        <CategoriesList categories={categoriesData}/>
+        <div className="category-menu">
+            <CategoriesList data={categoriesData} />
+        </div>
     )
 }
 

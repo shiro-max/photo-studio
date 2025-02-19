@@ -1,24 +1,23 @@
 import Link from 'next/link'
-import React from 'react'
-import { getNavBar } from '../api/fetch'
+
 import Image from 'next/image'
 
-const NavBar = async () => {
+const NavBar =  ({data}) => {
     const BASE_URL = process.env.STRAPI_IMG_ENDPOINT
-    const navData = await getNavBar();
-    
+    const navData =  {data};
+
     return (
         <div className='nav-bar'>
             <Image
                 className="nav-logo"
-                src={`${BASE_URL}${navData?.logo.image.url}`}
-                alt={navData?.logo[0]?.alternativeText || "Post image"}
+                src={`${BASE_URL}${navData?.data?.logo[0]?.image.url}`}
+                alt={navData?.data?.logo[0]?.alternativeText || "Post image"}
                 width={60}
                 height={60}
                 priority={true}
                 />
             <nav >
-                {navData?.Link && navData?.Link?.map((link)=>(
+                {navData?.data?.links?.map((link)=>(
                     <Link key={link.name} href={link.path}>
                         {link.name}
                     </Link>

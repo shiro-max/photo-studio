@@ -1,24 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const PostList = ({ posts, title }) => {
+const PostList = ({ posts }) => {
 
 
     const BASE_URL = process.env.STRAPI_IMG_ENDPOINT
 
-
+    console.log(posts);
     return (
-        <main>
-            <h2 className="postList-heading">{title}</h2>
-            <div className="post-list">
-                {posts.posts && posts.posts.map((post) => (
+        <div className="post-list">
+                {posts && posts.map((post) => (
                     <div key={post.documentId} className="post-card">
                         <Image
                             className="postList-image"
                             src={`${BASE_URL}${post.image.url}`}
                             alt={post.image.alternativeText || "Post image"}
                             width={400}
-                            height={400}
+                            height={300}
                             priority={true}
                         />
                         <div className="p-5">
@@ -29,7 +27,7 @@ const PostList = ({ posts, title }) => {
                             <Link href={`/posts/${post.documentId}`}>
                                 Read More...
                                 <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                                 </svg>
                             </Link>
                         </div>
@@ -37,7 +35,6 @@ const PostList = ({ posts, title }) => {
                     </div>
                 ))}
             </div>
-        </main>
     )
 }
 

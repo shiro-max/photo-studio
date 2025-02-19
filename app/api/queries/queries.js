@@ -1,74 +1,88 @@
 import { gql } from '@apollo/client';
 
-// Get Navigation Links 
+//get Home Page {Navigations,HeroSection,Categories-Menu,Blog Info}
 
-const GET_NAVIGATION_LINKS = gql`
-query GetNavLinks {
-    navigation {
-        logo {
-            image {
-                alternativeText
-                url
-            }
-        }
-    Link {
-        ... on ComponentLinksLink {
-            name
-            path
-            }
-        }
-    }
-}
-`
-
-export { GET_NAVIGATION_LINKS }
-
-// Get Hero Section qureies from strapi graphql
-
-const GET_HERO_SECTION = gql`
-query GetHeroSection {
-    homePage {
-        heroSection {
-        ... on ComponentBlocksHeroSection {
-            heading
+const GET_HOME = gql`
+query GetHomePage{
+    posts {
+            title
             description
+            body
+            author
+            documentId
             image {
-                alternativeText
-                url
-            }
+                    alternativeText
+                    url
+                }
+        }
+    homePage {
+        Home {
+        ... on ComponentBlocksNavBar {
+            logo {
+                image {
+                    alternativeText
+                    url
+                    }
+                }
+            links {
+                name
+                path
+                }
+        }
+        ... on ComponentBlocksHeroSection {
+            description
+            heading
             cta {
                 name
                 path
+                }
+            image {
+                alternativeText
+                url
+                }
+        }
+        ... on ComponentBlocksMenu {
+            categories {
+                name
+                path
+                documentId
+                posts {
+                    title
+                    description
+                    body
+                    author
+                    documentId
+                    image {
+                        alternativeText
+                        url
+                    }
+                categories {
+                        name
+                        path
+                        documentId
+                        posts {
+                            title
+                            description
+                            body
+                            author
+                            documentId
+                        image {
+                            alternativeText
+                            url
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 }
-    `
-
-export { GET_HERO_SECTION }
-
-
-
-// Get all posts qureies from strapi graphql
-
-const GET_POSTS = gql`
-query GetPosts {
-    posts {
-        documentId
-        title
-        description
-        image {
-            url
-            documentId
-            name
-            alternativeText
-        }
-    }
-}
 `
 
-export { GET_POSTS }
+export { GET_HOME }
+
+
 
 
 // Get single post by documentId qureies from strapi graphql
@@ -92,37 +106,3 @@ query GetSinglePost($documentId: ID!) {
 `
 
 export { GET_POST }
-
-
-// get categories
-
-const GET_CATEGORIES = gql`
-query GetCategories {
-    menu {
-        categories {
-                name
-                path
-                documentId
-                posts {
-                        title
-                        body
-                        author
-                        documentId
-                        description
-                        image {
-                            alternativeText
-                            url
-                            documentId
-                            }
-                        categories {
-                            documentId
-                            name
-                            path
-                            }
-                }
-        }
-    }
-}
-`
-
-export { GET_CATEGORIES }

@@ -1,14 +1,17 @@
-import { getPosts } from "../api/fetch";
 import PostList from "./PostList";
 
 
-const Posts = async () => {
-    const posts = await getPosts();
-    
+const Posts = ({ data }) => {
+    const posts ={data};
     return (
-        <main>
-            <PostList posts={posts} title="All Posts"/>
-        </main>
+        <>
+        <div className="postList-heading">
+            <h2>All Post</h2>
+        </div>
+        <div>
+            <PostList posts={data}/>
+        </div>
+        </>
     );
 };
 

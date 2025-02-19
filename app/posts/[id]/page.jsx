@@ -13,7 +13,7 @@ const PostDetail = async ({ params }) => {
     const BASE_URL = process.env.STRAPI_IMG_ENDPOINT
     console.log(post);
 
-    
+
     return (
         <div className="post-detail">
             <h2>{post?.title}</h2>
@@ -26,7 +26,7 @@ const PostDetail = async ({ params }) => {
                 height={400}
                 priority={true}
             />
-            <p style={{lineHeight: "2"}}>{post?.body}</p>
+            <p style={{ lineHeight: "2" }}>{post?.body}</p>
         </div>
     );
 };
