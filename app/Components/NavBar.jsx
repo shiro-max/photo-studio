@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const NavBar =  ({data}) => {
-    const BASE_URL = process.env.STRAPI_IMG_ENDPOINT
+    const BASE_URL = process.env.NEXT_PUBLIC_STRAPI_IMG_ENDPOINT
     const navData =  {data};
 
     return (

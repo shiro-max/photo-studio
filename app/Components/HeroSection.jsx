@@ -1,10 +1,9 @@
 import Image from 'next/image'
-import { getHeroSection } from '../api/fetch'
 import Link from 'next/link';
 
 const HeroSection = ({ data }) => {
     // base url for image
-    const BASE_URL = process.env.STRAPI_IMG_ENDPOINT
+    const BASE_URL = process.env.NEXT_PUBLIC_STRAPI_IMG_ENDPOINT
     const heroData = { data };
     
     return (

@@ -1,12 +1,15 @@
+'use client';
 import Image from "next/image";
 import Link from "next/link";
+import { useContext } from "react";
+import { PostContext } from "./page";
 
-const PostList = ({ posts }) => {
 
+const PostList = () => {
+    const posts = useContext(PostContext)
+    const BASE_URL = process.env.NEXT_PUBLIC_STRAPI_IMG_ENDPOINT
 
-    const BASE_URL = process.env.STRAPI_IMG_ENDPOINT
-
-    console.log(posts);
+    
     return (
         <div className="post-list">
                 {posts && posts.map((post) => (

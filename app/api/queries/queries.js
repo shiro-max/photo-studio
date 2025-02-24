@@ -89,18 +89,21 @@ export { GET_HOME }
 
 const GET_POST = gql`
 query GetSinglePost($documentId: ID!) {
-        post(documentId: $documentId) {
-        documentId
-        title
-        description
-        body
-        image {
-            name
-            alternativeText
+    post(documentId: $documentId) {
             documentId
-            url
-            }
-        updatedAt
+            title
+            description
+            body
+            author
+            image {
+                alternativeText
+                url
+                }
+            categories {
+                name
+                path
+                documentId
+                }
     }
 }
 `
